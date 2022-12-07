@@ -12,11 +12,11 @@ def return_args_trainers_bagpipe(private_ip_server, private_ip_client):
 
     run_args_trainers = [
         {
-            "cmd": "clone git@github.com:iidsample/rpc_test && cd rpc_test {} ".format(
+            "cmd": "git clone git@github.com:iidsample/rpc_test.git && cd rpc_test && run.sh {} ".format(
                 private_ip_server
             )
         }
-        for i in range(len(private_ip_trainers))
+        for i in range(len(private_ip_client))
     ]
 
     return run_args_trainers
@@ -197,15 +197,15 @@ def run_large_scale():
 
     launch_cfg = {
         "name": "recommendation-setup",
-        "key_name": "chengpo_oregon",
-        "key_path": "/Users/jesse/Documents/cs-shivaram/chengpo_oregon.pem",
+        "key_name": "saurabh_oregon_pc",
+        "key_path": "/home/saurabh/credentials/cs-shivaram/saurabh_oregon_pc.pem",
         "region": "us-west-2",
         "method": "onDemand",  # onDemand
         "az": "us-west-2c",
         "GroupName": "distributed-training",
         # "ami_id": "ami-0f07487e2b2761b0a", # nv old
         # "ami_id": "ami-04e4121bc8f056792", # oregon old
-        "ami_id": "ami-00cfdc3a2d9df3424",
+        "ami_id": "ami-07526246b6e8e6e4c",
         "ssh_username": "ubuntu",
         "iam_role": "ec2-s3-final",
         "instance_type": "p3.2xlarge",
@@ -233,12 +233,18 @@ def run_large_scale():
     )
     # trainer client warmup ebs
 
-    run_args_get_data = return_args_trainers_bagpipe(private_ip_trainers)
+    run_args_get_data = return_args_trainers_bagpipe(
+        "172.31.53.138", private_ip_trainers
+    )
+    print(run_args_get_data)
     time.sleep(30)
     output_trainers = client_trainers.run_command(
         "%(cmd)s", host_args=run_args_get_data
     )
-
+    print("line")
+    for hosts_out in output_trainers:
+        for line in hosts_out.stdout:
+            print(line)
     # all location have data
     # trainer instances warmed up
 
