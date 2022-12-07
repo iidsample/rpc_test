@@ -30,7 +30,7 @@ def run():
 if __name__ == "__main__":
     import logging
 
-    logging.basicConfig(filename="timing_file.py")
+    logging.basicConfig(filename="timing_again.txt")
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
     # logger.info(args)
