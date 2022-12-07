@@ -1,4 +1,4 @@
-source ./ptorch/bin/activate
+source /home/ubuntu/ptorch/bin/activate
 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python client.py $1 &
 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python client.py $1 &
 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python client.py $1 &
