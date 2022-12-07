@@ -1,0 +1,16 @@
+syntax = "proto3"; 
+
+service RMServer{
+	rpc QueryWorker(IntVal) returns(IntVal) {}
+}
+
+message IntVal{
+  int32 value = 1; 
+}
+
+message BooleanResponse{
+  bool value = 1;
+}
+
+
+
